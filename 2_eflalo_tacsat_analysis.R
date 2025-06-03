@@ -396,6 +396,9 @@ for(year in yearsToSubmit){
         
         
         metiers <- unique(nonsubTacsat$LE_L5MET)
+        # Einar: If nonsubTacsat is of zero length get error below
+        #        Hence add an if-else
+        if(length(metiers) > 0) {
         nonsubTacsat$SI_STATE <- NA
         for (mm in metiers) {
           nonsubTacsat$SI_STATE[
@@ -416,6 +419,9 @@ for(year in yearsToSubmit){
         
         
         tacsatp <- rbindTacsat(subTacsat, nonsubTacsat)
+        } else {
+          tacsatp <- subTacsat
+        }
         tacsatp <- orderBy( ~ VE_REF + SI_DATIM, data = tacsatp)
         
         # This next step is retained from previous code. The new function to assign
