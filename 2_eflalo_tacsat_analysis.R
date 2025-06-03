@@ -395,7 +395,7 @@ for(year in yearsToSubmit){
         
         
         
-        metiers <- unique(nonsubTacsat$LE_l5MET)
+        metiers <- unique(nonsubTacsat$LE_L5MET)
         nonsubTacsat$SI_STATE <- NA
         for (mm in metiers) {
           nonsubTacsat$SI_STATE[
