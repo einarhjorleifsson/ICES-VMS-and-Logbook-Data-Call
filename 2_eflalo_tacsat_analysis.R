@@ -4,6 +4,19 @@
 # 2: Linking TACSAT and EFLALO data                                       ----
 #
 #'------------------------------------------------------------------------------
+library(icesVocab)
+library(vmstools)
+library(data.table)
+library(tidyverse)
+library(sf)
+source("0_global_functions.R")
+source("0_global_settings.R")
+# Load the bathymetry and habitat layers into R
+sf::sf_use_s2(FALSE)
+eusm <- readRDS(paste0(dataPath, "eusm.rds"))
+eusm <- eusm %>% st_transform(4326)
+bathy <- readRDS(paste0(dataPath, "ICES_GEBCO.rds"))
+bathy <- bathy %>% st_set_crs(4326)
 
 # Looping through the years to submit
 
@@ -333,7 +346,7 @@ for(year in yearsToSubmit){
             units = "year",
             analyse.by = "LE_L5MET",
             storeScheme = storeScheme,
-            plot = TRUE,
+            plot = FALSE,
             level = "all")
         subTacsat$SI_STATE <- acTa
         subTacsat$ID <- 1:nrow(subTacsat)
@@ -395,7 +408,8 @@ for(year in yearsToSubmit){
         
         
         
-        metiers <- unique(nonsubTacsat$LE_l5MET)
+        metiers <- unique(nonsubTacsat$LE_L5MET)
+        if(length(metiers) > 0) {
         nonsubTacsat$SI_STATE <- NA
         for (mm in metiers) {
           nonsubTacsat$SI_STATE[
@@ -404,6 +418,7 @@ for(year in yearsToSubmit){
               nonsubTacsat$SI_SP <= speedarr[speedarr$LE_GEAR == mm, "max"]
           ] <- "f";
         }
+        
         nonsubTacsat$SI_STATE[
           nonsubTacsat$LE_GEAR == "NA" &
             nonsubTacsat$SI_SP >= speedarr[speedarr$LE_GEAR == "MIS", "min"] &
@@ -412,10 +427,14 @@ for(year in yearsToSubmit){
         nonsubTacsat$SI_STATE[ is.na(nonsubTacsat$SI_STATE) ] <- "s"
         
         
+        
         # Combine the two dataset together again =============== 
         
         
         tacsatp <- rbindTacsat(subTacsat, nonsubTacsat)
+        } else {
+          tacsatp <- subTacsat
+        }
         tacsatp <- orderBy( ~ VE_REF + SI_DATIM, data = tacsatp)
         
         # This next step is retained from previous code. The new function to assign
