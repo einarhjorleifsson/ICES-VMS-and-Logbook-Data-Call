@@ -4,7 +4,14 @@
 # 1: Pre-processing and cleaning TACSAT and EFLALO data                     ----
 #
 #'------------------------------------------------------------------------------
+library(icesVocab)
+library(vmstools)
+library(data.table)
+library(tidyverse)
+library(sf)
+source("0_global_functions.R")
 
+source("0_global_settings.R")
 #'------------------------------------------------------------------------------
 # 1.0 Preparations                                                          ----
 #'------------------------------------------------------------------------------
@@ -25,9 +32,6 @@ harbours_alt <-
   sf::st_buffer(dist = 3000) |> 
   sf::st_transform(crs = 4326) |> 
   dplyr::select(harbour)
-
-
-
 
 # Looping through the years to submit
 for(year in yearsToSubmit){
