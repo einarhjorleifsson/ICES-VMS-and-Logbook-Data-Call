@@ -333,7 +333,7 @@ for(year in yearsToSubmit){
             units = "year",
             analyse.by = "LE_L5MET",
             storeScheme = storeScheme,
-            plot = TRUE,
+            plot = FALSE,
             level = "all")
         subTacsat$SI_STATE <- acTa
         subTacsat$ID <- 1:nrow(subTacsat)
