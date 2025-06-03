@@ -99,7 +99,7 @@ valid_metiers <- fread("https://raw.githubusercontent.com/ices-eg/RCGs/master/Me
 if(!file.exists(paste0(dataPath, "hab_and_bathy_layers.zip"))) {
  
   shared_link <- "https://icesit.sharepoint.com/:u:/g/Efh5rtBiIhFPsnFcWXH-khYBKRBEHkEDjLHh4OFrMX68Vw?e=cubybi&download=1"
-  local_path <- "data/hab_and_bathy_layers.zip"
+  local_path <- "Data/hab_and_bathy_layers.zip"
   
 
 
@@ -191,7 +191,7 @@ if(!file.exists(paste0(dataPath, "hab_and_bathy_layers.zip"))) {
   
 }
 
-unzip(zipfile = paste0(dataPath, "hab_and_bathy_layers.zip"), overwrite = TRUE, exdir = dataPath))
+unzip(zipfile = paste0(dataPath, "hab_and_bathy_layers.zip"), overwrite = TRUE, exdir = dataPath)
 
 # Load the bathymetry and habitat layers into R
 
