@@ -27,3 +27,7 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 ICES-VMS-and-Logbook-Data-Call.Rproj
+Data
+Results
+Plots
+Scripts
