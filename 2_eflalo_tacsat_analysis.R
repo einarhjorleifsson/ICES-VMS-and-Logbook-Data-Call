@@ -4,6 +4,19 @@
 # 2: Linking TACSAT and EFLALO data                                       ----
 #
 #'------------------------------------------------------------------------------
+library(icesVocab)
+library(vmstools)
+library(data.table)
+library(tidyverse)
+library(sf)
+source("0_global_functions.R")
+source("0_global_settings.R")
+# Load the bathymetry and habitat layers into R
+sf::sf_use_s2(FALSE)
+eusm <- readRDS(paste0(dataPath, "eusm.rds"))
+eusm <- eusm %>% st_transform(4326)
+bathy <- readRDS(paste0(dataPath, "ICES_GEBCO.rds"))
+bathy <- bathy %>% st_set_crs(4326)
 
 # Looping through the years to submit
 
@@ -396,8 +409,11 @@ for(year in yearsToSubmit){
         
         
         metiers <- unique(nonsubTacsat$LE_L5MET)
+<<<<<<< HEAD
         # Einar: If nonsubTacsat is of zero length get error below
         #        Hence add an if-else
+=======
+>>>>>>> is_way
         if(length(metiers) > 0) {
         nonsubTacsat$SI_STATE <- NA
         for (mm in metiers) {
@@ -407,12 +423,14 @@ for(year in yearsToSubmit){
               nonsubTacsat$SI_SP <= speedarr[speedarr$LE_GEAR == mm, "max"]
           ] <- "f";
         }
+        
         nonsubTacsat$SI_STATE[
           nonsubTacsat$LE_GEAR == "NA" &
             nonsubTacsat$SI_SP >= speedarr[speedarr$LE_GEAR == "MIS", "min"] &
             nonsubTacsat$SI_SP <= speedarr[speedarr$LE_GEAR == "MIS", "max"]
         ] <- "f"
         nonsubTacsat$SI_STATE[ is.na(nonsubTacsat$SI_STATE) ] <- "s"
+        
         
         
         # Combine the two dataset together again =============== 

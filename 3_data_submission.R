@@ -576,7 +576,7 @@ table( table2$INTV > 0  )
 
 # Rename columns to match expected field names
 colnames(table1Save)[which(colnames(table1Save) == "Csquare")] <- "C-square"
-colnames(table1Save)[which(colnames(table1Save) == "Habitat")] <- "HabitatType"  
+colnames(table1Save)[which(colnames(table1Save) == "Habitat")] <- "HabitatType"
 colnames(table1Save)[which(colnames(table1Save) == "Depth")] <- "DepthRange"
 colnames(table1Save)[which(colnames(table1Save) == "No_Records")] <- "NumberOfRecords"
 
