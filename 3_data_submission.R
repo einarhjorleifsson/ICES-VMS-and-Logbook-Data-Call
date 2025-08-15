@@ -4,6 +4,12 @@
 # 3: Construct and collect tables                                         ----
 #
 #'------------------------------------------------------------------------------
+library(tidyverse)
+library(icesVocab)
+library(vmstools)
+library(glue)
+library(gt)
+source("0_global_settings.R")
 
 # Loop through years to submit
 for(year in yearsToSubmit){
