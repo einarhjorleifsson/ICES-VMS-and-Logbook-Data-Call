@@ -409,11 +409,8 @@ for(year in yearsToSubmit){
         
         
         metiers <- unique(nonsubTacsat$LE_L5MET)
-<<<<<<< HEAD
         # Einar: If nonsubTacsat is of zero length get error below
         #        Hence add an if-else
-=======
->>>>>>> is_way
         if(length(metiers) > 0) {
         nonsubTacsat$SI_STATE <- NA
         for (mm in metiers) {
