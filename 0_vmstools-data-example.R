@@ -6,7 +6,8 @@ data(eflalo)
 tacsat2 <- 
   tacsat |> 
   dplyr::mutate(SI_DATE = stringr::str_replace(SI_DATE, "1800", "1803"),
-                SI_DATE = stringr::str_replace(SI_DATE, "1801", "1804"))
+                SI_DATE = stringr::str_replace(SI_DATE, "1801", "1804"),
+                VE_COU = "NL")
 eflalo2 <-
   eflalo |>  
   dplyr::mutate(FT_DDAT = stringr::str_replace(FT_DDAT, "1800", "1803"),
@@ -14,7 +15,8 @@ eflalo2 <-
                 FT_LDAT = stringr::str_replace(FT_LDAT, "1800", "1803"),
                 FT_LDAT = stringr::str_replace(FT_LDAT, "1801", "1804"),
                 LE_CDAT = stringr::str_replace(LE_CDAT, "1800", "1803"),
-                LE_CDAT = stringr::str_replace(LE_CDAT, "1801", "1804")) |> 
+                LE_CDAT = stringr::str_replace(LE_CDAT, "1801", "1804"),
+                VE_COU = "NL") |> 
   dplyr::rename(LE_MET = LE_MET_level6)
 
 yrs <- 1803:1804
